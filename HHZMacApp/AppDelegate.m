@@ -35,7 +35,7 @@
     NSWindow * window = [NSWindow windowWithContentViewController:vc];
 
     self.loginWindow = [[MainWindowController alloc] initWithWindow:window];
-    self.loginWindow.window.title = @"陈哲是个好孩子";
+    self.loginWindow.window.title = @"修改 Xcode 模板文件";
     [self.loginWindow showWindow:self];
     //注册窗口拉伸导致Size改变的通知
     [self registerWindowSizeModify:window];

@@ -25,7 +25,7 @@
 /* Begin PBXFileReference section */
 		06A2E41E499DBE4C01818840 /* Pods-HHZMacApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HHZMacApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-HHZMacApp/Pods-HHZMacApp.release.xcconfig"; sourceTree = "<group>"; };
 		4390749847C5DABBF34ED399 /* libPods-HHZMacApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HHZMacApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		7461CC9E1F1664A3009F3238 /* HHZMacApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HHZMacApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7461CC9E1F1664A3009F3238 /* ModifyXctemplateFile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ModifyXctemplateFile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7461CCA11F1664A3009F3238 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7461CCA21F1664A3009F3238 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		7461CCA51F1664A3009F3238 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -94,7 +94,7 @@
 		7461CC9F1F1664A3009F3238 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7461CC9E1F1664A3009F3238 /* HHZMacApp.app */,
+				7461CC9E1F1664A3009F3238 /* ModifyXctemplateFile.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -194,7 +194,7 @@
 			);
 			name = HHZMacApp;
 			productName = HHZMacApp;
-			productReference = 7461CC9E1F1664A3009F3238 /* HHZMacApp.app */;
+			productReference = 7461CC9E1F1664A3009F3238 /* ModifyXctemplateFile.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -413,7 +413,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.chenzhe.HHZMacApp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = ModifyXctemplateFile;
 			};
 			name = Debug;
 		};
@@ -429,7 +429,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.chenzhe.HHZMacApp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = ModifyXctemplateFile;
 			};
 			name = Release;
 		};

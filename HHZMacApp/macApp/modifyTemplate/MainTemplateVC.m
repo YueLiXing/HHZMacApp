@@ -252,24 +252,28 @@
 
 -(void)createSaveButton
 {
-    self.sublimeButton = [NSButton buttonWithTitle:@"用Sublime Text打开(推荐使用)" target:self action:@selector(openFileWithSublime)];
+    self.sublimeButton = [NSButton buttonWithTitle:@"用Sublime Text打开" target:self action:@selector(openFileWithSublime)];
     self.sublimeButton.frame = CGRectMake(self.templateLeftTableView.frame.origin.x + self.templateLeftTableView.frame.size.width + (self.templateRightTopText.frame.size.width/2 - 240)/2, 10, 240, 24);
     [self.templateMainView addSubview:self.sublimeButton];
     
     self.saveButton = [NSButton buttonWithTitle:@"保存修改" target:self action:@selector(writeStringToFileText)];
     self.saveButton.frame = CGRectMake(self.templateLeftTableView.frame.origin.x + self.templateLeftTableView.frame.size.width + (self.templateRightTopText.frame.size.width*3/2 - 100)/2, 10, 100, 24);
-    [self.templateMainView addSubview:self.saveButton];
+    // 暂时隐藏此案牛
+//    [self.templateMainView addSubview:self.saveButton];
 }
 
 -(NSString *)readFileText
 {
     @autoreleasepool {
         NSMutableString * mutaStr = [[NSMutableString alloc] init];
-        NSString * str1 = [_box1.stringValue stringByReplacingOccurrencesOfString:@" " withString:@"\ "];
-        NSString * str2 = [_box2.stringValue stringByReplacingOccurrencesOfString:@" " withString:@"\ "];
-        NSString * str3 = [_box3.stringValue stringByReplacingOccurrencesOfString:@" " withString:@"\ "];
-        NSString * str4 = [_box4.stringValue stringByReplacingOccurrencesOfString:@" " withString:@"\ "];
-        [mutaStr appendFormat:@"/Applications/%@.app/Contents/Developer/Platforms/%@.platform/Developer/Library/Xcode/Templates/File\ Templates/Source/%@.xctemplate/%@/___FILEBASENAME___%@",str1,str2,str3,_selectBtnTitle,str4];
+        NSString * str1 = _box1.stringValue;
+        NSString * str2 = _box2.stringValue;
+        NSString * str3 = _box3.stringValue;
+        NSString * str4 = _box4.stringValue;
+        if ([_selectBtnTitle hasSuffix:@"Swift"]) {
+            str4 = @".swift";
+        }
+        [mutaStr appendFormat:@"/Applications/%@.app/Contents/Developer/Platforms/%@.platform/Developer/Library/Xcode/Templates/File Templates/Source/%@.xctemplate/%@/___FILEBASENAME___%@",str1,str2,str3,_selectBtnTitle,str4];
         NSError * fileError = nil;
         _selectFilePath = mutaStr;
         NSString * str = [NSString stringWithContentsOfFile:_selectFilePath encoding:NSUTF8StringEncoding error:&fileError];
@@ -285,8 +289,7 @@
     }
 }
 
--(void)writeStringToFileText
-{
+- (void)writeStringToFileText {
     NSAlert * alert = [[NSAlert alloc] init];
     alert.messageText = @"由于权限问题，不能直接写入。\n可通过AuthorizationExecuteWithPrivileges脚本写入，暂不深入了，毕竟刚做一天半的OSX开发，蛋疼地方有点多...";
     [alert addButtonWithTitle:@"确定"];
@@ -297,13 +300,22 @@
 {
     if([[NSFileManager defaultManager] fileExistsAtPath:_selectFilePath])
     {
-        NSTask * task = [NSTask launchedTaskWithLaunchPath:@"/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl" arguments:@[_selectFilePath]];
-        [task launch];
-    }
-    else
-    {
+        NSString * subBinPath = @"/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl";
+        if ([[NSFileManager defaultManager] fileExistsAtPath:subBinPath]) {
+            NSTask * task = [NSTask launchedTaskWithLaunchPath:subBinPath arguments:@[_selectFilePath]];
+            [task launch];
+        } else {
+            NSAlert * alert = [[NSAlert alloc] init];
+            alert.messageText = @"未安装Sublime Text";
+            [alert addButtonWithTitle:@"确定"];
+            [alert runModal];
+//            NSTask * task = [NSTask launchedTaskWithLaunchPath:@"open" arguments:@[_selectFilePath]];
+//            [task launch];
+        }
+        
+    } else {
         NSAlert * alert = [[NSAlert alloc] init];
-        alert.messageText = @"文件不存在/未安装Sublime Text!\n(或者你给Sublime改名了...别坑我!)";
+        alert.messageText = @"文件不存在";
         [alert addButtonWithTitle:@"确定"];
         [alert runModal];
     }
